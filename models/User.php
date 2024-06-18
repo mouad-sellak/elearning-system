@@ -3,10 +3,12 @@ class User
 {
     static public function create($user)
     {
-        $sql = "INSERT INTO utilisateurs(nom,prenom,email,role,login,password,telephone)
-        VALUES(:nom,:prenom,:email,:role,:login,:password,:telephone)";
-        $role = 'Employe';
+        $sql = "INSERT INTO utilisateurs(equipe_id,nom,prenom,email,role,login,password,telephone)
+        VALUES(:equipe_id,:nom,:prenom,:email,:role,:login,:password,:telephone)";
+        $role = 'Consultant';
+        $equipe_id = 2;
         $pdo = Connexion::Connect()->prepare($sql);
+        $pdo->bindParam(':equipe_id', $equipe_id , PDO::PARAM_STR);
         $pdo->bindParam(':nom', $user['nom'], PDO::PARAM_STR);
         $pdo->bindParam(':prenom', $user['prenom'], PDO::PARAM_STR);
         $pdo->bindParam(':email', $user['email'], PDO::PARAM_STR);

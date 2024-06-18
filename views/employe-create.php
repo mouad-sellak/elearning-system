@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
                             <strong id="explicationPass"></strong>
                         </div>
                         <div class="form-group">
-                            <button type="submit" name="submit" disabled class="btn btn-light">Valider</button>
+                            <button type="submit" name="submit"  class="btn btn-light">Valider</button>
                         </div>
                     </form>
                 </div>

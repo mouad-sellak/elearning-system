@@ -7,7 +7,7 @@ $users = $data->readAllUsers();
         <div class="col-md-10 mx-auto">
             <?php if ($_SESSION['user']->role === 'Administrateur') { ?>
                 <div class="card">
-                    <div class="card-body " style="background-color: rgb(39,162,212);">
+                    <div class="card-body" style="background-color: rgb(39,162,212);">
                         <a href="http://localhost/elearning-system/employe-create" title="Ajoute employé" class="btn btn-light mb-2"><i class="fa fa-plus"></i></a>
                         <div class="table-responsive">
                             <table class="table table-bordered text-white">
@@ -29,11 +29,14 @@ $users = $data->readAllUsers();
                                             <td><?php echo $user['telephone']; ?></td>
                                             <td><?php echo $user['login']; ?></td>
                                             <td><?php echo $user['role']; ?></td>
-                                            <td class="d-flex flex-row">
-                                                <form class="ml-2" method="post" action="employe-delete">
+                                            <td>
+                                                <form class="d-flex justify-content-around" method="post" action="#">
                                                     <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
-                                                    <button type="submit" class="btn btn-sm btn-light" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette voiture ?');">
+                                                    <button type="submit" formaction="http://localhost/elearning-system/employe-delete" class="btn btn-sm btn-light m-2" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette voiture ?');">
                                                         <i class="fa fa-trash"></i>
+                                                    </button>
+                                                    <button type="submit" formaction="http://localhost/elearning-system/employe-edit" class="btn btn-sm m-2 btn-light">
+                                                        <i class="fa fa-edit"></i>
                                                     </button>
                                                 </form>
                                             </td>

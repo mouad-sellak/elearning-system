@@ -3,7 +3,7 @@ include('views/includes/Header.php');
 include('Autoload.php');
 include('views/includes/NavBar.php');
 $gestionPages = [
-    'gestion-employes', 'employe-create', 'employe-delete', 'employe-profile', 'employe-change-password', 'employe-logout',
+    'gestion-employes', 'employe-create', 'employe-edit', 'employe-delete',  'employe-profile', 'employe-change-password', 'employe-logout',
     'ptmo-ppmo', 
     'ptmo-activite1', 'ptmo-activite2', 'ptmo-activite3', 'ptmo-activite4', 'ptmo-activite5',
     'ppmo-activite1', 'ppmo-activite2',

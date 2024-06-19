@@ -89,7 +89,7 @@ class UserController
                 'nom' => $_POST['nom'],
                 'prenom' => $_POST['prenom'],
                 'email' => $_POST['email'],
-                'role' => 'Employe',
+                'team' => $_POST['team'],
                 'login' => $_POST['login'],
                 'password' => MD5($_POST['password']),
                 'telephone' => $_POST['telephone'],
@@ -111,6 +111,18 @@ class UserController
         }
     }
 
+    public function editUser()
+    {
+        $user = array(
+            'id' => $_POST['id'],
+            'role' => $_POST['role'],
+        );
+        $result = User::update($user);
+        if ($result == 'ok') {
+            header('location: gestion-employes');
+        }
+    }
+
     public function getAdminPhone()
     {
         $phone = User::getPhone();
@@ -121,6 +133,12 @@ class UserController
     {
         $Users = User::readAll();
         return $Users;
+    }
+
+    public function getTeams()
+    {
+        $Teams = User::getTeams();
+        return $Teams;
     }
 
     public function deleteUser($id)

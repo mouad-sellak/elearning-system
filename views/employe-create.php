@@ -3,14 +3,19 @@ if (isset($_POST['submit'])) {
     $newUser = new UserController();
     $newUser->createUser();
 }
+
+// Récupérer les équipes
+$userController = new UserController();
+$teams = $userController->getTeams();
 ?>
 <div class="container">
     <div class="row mt-4">
         <div class="col-md-8 mx-auto">
             <div class="card">
                 <div class="card card-header" style="background-color: rgb(39,162,212);">
-                    <h5><label>Ajouter un utilisateur</label></h5></div>
-                <div class="card-body bg-primary" id="box">
+                    <h5><label>Ajouter un utilisateur</label></h5>
+                </div>
+                <div class="card-body" style="background-color: rgb(39,162,212);" id="box">
                     <a href="http://localhost/elarning-system/gestion-employes" class="btn btn-light mb-2"><i class="fa fa-home"></i></a>
                     <form method="post" onsubmit="return validateForm();">
                         <div class="form-group">
@@ -50,7 +55,15 @@ if (isset($_POST['submit'])) {
                             <strong id="explicationPass"></strong>
                         </div>
                         <div class="form-group">
-                            <button type="submit" name="submit"  class="btn btn-light">Valider</button>
+                            <label class="control-label" for="team">Équipe*</label>
+                            <select class="form-control deblock" name="team">
+                                <?php foreach ($teams as $team): ?>
+                                    <option value="<?php echo $team['id']; ?>"><?php echo $team['nom']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" name="submit" class="btn btn-light">Valider</button>
                         </div>
                     </form>
                 </div>

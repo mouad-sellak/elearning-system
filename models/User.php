@@ -6,9 +6,8 @@ class User
         $sql = "INSERT INTO utilisateurs(equipe_id,nom,prenom,email,role,login,password,telephone)
         VALUES(:equipe_id,:nom,:prenom,:email,:role,:login,:password,:telephone)";
         $role = 'Consultant';
-        $equipe_id = 2;
         $pdo = Connexion::Connect()->prepare($sql);
-        $pdo->bindParam(':equipe_id', $equipe_id , PDO::PARAM_STR);
+        $pdo->bindParam(':equipe_id', $user['team'] , PDO::PARAM_STR);
         $pdo->bindParam(':nom', $user['nom'], PDO::PARAM_STR);
         $pdo->bindParam(':prenom', $user['prenom'], PDO::PARAM_STR);
         $pdo->bindParam(':email', $user['email'], PDO::PARAM_STR);
@@ -44,16 +43,19 @@ class User
         return $pdo->fetchAll();
     }
 
+    static public function getTeams()
+    {
+        $pdo = Connexion::Connect()->prepare("SELECT * FROM equipes");
+        $pdo->execute();
+        return $pdo->fetchAll();
+    }
+
     static public function update($user)
     {
-        $sql = "UPDATE utilisateurs SET nom=:nom, prenom=:prenom, email=:email, login=:login, telephone=:telephone WHERE id=:id";
+        $sql = "UPDATE utilisateurs SET role=:role WHERE id=:id";
         $pdo = Connexion::Connect()->prepare($sql);
         $pdo->bindParam(':id', $user['id'], PDO::PARAM_INT);
-        $pdo->bindParam(':nom', $user['nom'], PDO::PARAM_STR);
-        $pdo->bindParam(':prenom', $user['prenom'], PDO::PARAM_STR);
-        $pdo->bindParam(':email', $user['email'], PDO::PARAM_STR);
-        $pdo->bindParam(':login', $user['login'], PDO::PARAM_STR);
-        $pdo->bindParam(':telephone', $user['telephone'], PDO::PARAM_STR);
+        $pdo->bindParam(':role', $user['role'], PDO::PARAM_STR);
         if ($pdo->execute()) {
             return 'ok';
         } else {
